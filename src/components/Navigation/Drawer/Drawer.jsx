@@ -1,9 +1,12 @@
 import { Component } from "react";
-import classes from "./Drawer.module.css"
+import classes from "./Drawer.module.css";
 import Backdrop from "../../UI/Backdrop/Backdrop";
+import { NavLink } from "react-router-dom";
 
 const links = [
-    1, 2, 3
+    {to: '/', label: 'Список',},
+    {to: '/auth', label: 'Авторизация',},
+    {to: '/quiz-creator', label: 'Создать тест',},
 ]
 
 class Drawer extends Component {
@@ -11,7 +14,11 @@ class Drawer extends Component {
         return links.map((link, i) => {
             return (
                 <li key={i}>
-                    <a>Link {link}</a>
+                    <NavLink
+                        to={link.to}
+                        className={({isActive, isPending}) => isActive ? classes.active : null}
+                        onClick={this.props.onClose}
+                    >{link.label}</NavLink>
                 </li>
             )
         })

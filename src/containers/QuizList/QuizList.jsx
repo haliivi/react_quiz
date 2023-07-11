@@ -1,4 +1,5 @@
-import { Component } from "react"
+import { Component } from "react";
+import classes from "./QuizList.module.css"
 
 export default class QuizList extends Component {
     render () {

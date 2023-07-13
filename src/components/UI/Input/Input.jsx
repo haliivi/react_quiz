@@ -21,12 +21,8 @@ const Input = props => {
 
     return (
         <div className={cls.join(' ')}>
-            <label
-                htmlFor={htmlFor}
-                value={value}
-                onChange={onChange}
-            >{label}</label>
-            <input id={htmlFor} type={type} />
+            <label htmlFor={htmlFor}>{label}</label>
+            <input onChange={onChange} value={value} id={htmlFor} type={type} />
             {isInvalid(props) ? <span>{errorMessage || "Введите верное значение"}</span> : null}
         </div>
     )

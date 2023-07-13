@@ -107,18 +107,7 @@ export default class Auth extends Component {
                 <div>
                     <h1>Авторизация</h1>
                     <form onSubmit={this.onSubmitHandler} className={classes.AuthForm}>
-                        {/* <Input
-                            type="text"
-                            label="Email"
-                        />
-                        <Input
-                            type="text"
-                            label="Пароль"
-                            errorMessage={"ТЕСТ"}
-                        /> */}
-
                         {this.renderInputs()}
-
                         <Button
                             type="success"
                             onClick={this.loginHandler}

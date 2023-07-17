@@ -3,6 +3,7 @@ import classes from "./Auth.module.css";
 import Button from "../../components/UI/Button/Button"
 import Input from "../../components/UI/Input/Input"
 import is from "is_js";
+import axios from "axios";
 
 export default class Auth extends Component {
     constructor (props) {
@@ -37,17 +38,36 @@ export default class Auth extends Component {
                 },
             }
         }
+        this.api_key = process.env.REACT_APP_API_KEY
     }
 
-    loginHandler = () => {
-
+    loginHandler = async () => {
+        const authData = {
+            email: this.state.formControls.email.value,
+            password: this.state.formControls.password.value,
+            returnSecretToken: true,
+        }
+        try {
+            const response = await axios.post(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${this.api_key}`, authData)
+        } catch (e) {
+            console.log(e)
+        }
     }
 
-    registerHandler = () => {
-
+    registerHandler = async () => {
+        const authData = {
+            email: this.state.formControls.email.value,
+            password: this.state.formControls.password.value,
+            returnSecretToken: true,
+        }
+        try {
+            const response = await axios.post(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${this.api_key}`, authData)
+        } catch (e) {
+            console.log(e)
+        }
     }
 
-    onSubmitHandler = e => {e.preventDefault()} 
+    onSubmitHandler = e => {e.preventDefault()}
 
     validateControl (value, validation) {
         let isValid = true

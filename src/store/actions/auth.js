@@ -49,3 +49,23 @@ export function authSuccess(token) {
         token,
     }
 }
+
+export function autoLogin() {
+    return dispatch => {
+        const token = localStorage.getItem('token')
+        if (!token) {
+            dispatch(logout())
+        } else {
+            const expirationDate = new Date(localStorage.getItem('expirationDate'))
+            if (expirationDate <= new Date()) {
+                dispatch(logout)
+            } else {
+                dispatch(authSuccess(token))
+                const expirationTime = decodeToken(token).exp * 1000
+                const tokenLiveTime = expirationTime - Date.now()
+                dispatch(autoLogout(tokenLiveTime))
+            }
+
+        }
+    }
+}
